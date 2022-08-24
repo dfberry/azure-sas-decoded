@@ -1,8 +1,8 @@
 import { allowedNodeEnvironmentFlags } from "process";
-import ALL from "./index";
+import decoder from "./index";
 
 describe ('index', () =>{
     test('import succeeds', () =>{
-        ALL();
+        decoder();
     })
 })

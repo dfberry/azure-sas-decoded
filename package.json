@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "test:all": "npm run build && npm run test"
   },
   "repository": {
     "type": "git",
