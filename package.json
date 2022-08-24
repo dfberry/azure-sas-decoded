@@ -1,0 +1,33 @@
+{
+  "name": "azure-sas-decoded",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfberry/azure-sas-decoded.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dfberry/azure-sas-decoded/issues"
+  },
+  "homepage": "https://github.com/dfberry/azure-sas-decoded#readme",
+  "dependencies": {
+    "@azure/storage-blob": "^12.11.0",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.7.13",
+    "dotenv": "^16.0.1",
+    "esbuild": "^0.15.5",
+    "jest": "^28.1.3",
+    "jest-extended": "^3.0.2",
+    "json-format": "^1.0.1",
+    "query-string": "^7.1.1",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
