@@ -3,6 +3,10 @@ import type {Config} from '@jest/types';
 const config: Config.InitialOptions = {
   preset: 'ts-jest',
   verbose: true,
-  "testMatch": ["./**/*.test.ts"]
+  testMatch: ['**/**/*.test.ts?(x)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js'],
+  setupFilesAfterEnv: ['jest-extended/all'],
+  
 };
+
 export default config;
