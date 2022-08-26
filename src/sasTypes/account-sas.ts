@@ -1,46 +1,13 @@
-import {
+ import {
   generateAccountSASQueryParameters,
   AccountSASPermissions,
   AccountSASServices,
   AccountSASResourceTypes,
   StorageSharedKeyCredential,
   SASProtocol
-}  from '@azure/storage-blob';
+} from '@azure/storage-blob';
 
-import { AZURE_CONFIG } from './azure-config';
-export function isInOrder(permissions: string) {
-  // TBD what does empty permissions mean
-  if (!permissions || permissions.length === 0) return true;
-
-  // https://docs.microsoft.com/en-us/rest/api/storageservices/create-service-sas#specify-permissions
-  const requiredSortOrderArray = 'racwdxltmeop'.split('');
-
-  const sortedPermissions = permissions
-    .split('')
-    .sort(
-      (a, b) =>
-        requiredSortOrderArray.indexOf(a) - requiredSortOrderArray.indexOf(b)
-    )
-    .join('');
-
-  if (permissions === sortedPermissions) return true;
-
-  return false;
-}
-export function listBlobContainersWithAccountToken() {
-  // the permissions order matters
-  // if the L appears in the list before the R, the error returned is
-  // "Server failed to authenticate the request. Make sure the value of Authorization header is formed correctly including the signature.""
-
-  const minimumRequired = {
-    name: 'listBlobContainer',
-    ss: 'b', // blob storage
-    sp: 'l', // permissions
-    srt: 's' // service
-  };
-
-  return minimumRequired;
-}
+import { AZURE_CONFIG } from '../azure-config';
 
 interface EncodeParametersAccountSasFromKey {
   SasType: string;
@@ -52,7 +19,6 @@ interface EncodeParametersAccountSasFromKey {
   NowMinusMinutes: Date;
   NowPlusMinutes: Date;
 }
-
 
 export const decodeAccountSasToken = (sasToken: string) => {
   // const sasOptionsDecoded: any = {
