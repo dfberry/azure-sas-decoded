@@ -5,7 +5,7 @@ import {
   AccountSASResourceTypes,
   StorageSharedKeyCredential,
   SASProtocol
-}  from '@azure/storage-blob';
+} from '@azure/storage-blob';
 
 import { AZURE_CONFIG } from './azure-config';
 export function isInOrder(permissions: string) {
@@ -52,7 +52,6 @@ interface EncodeParametersAccountSasFromKey {
   NowMinusMinutes: Date;
   NowPlusMinutes: Date;
 }
-
 
 export const decodeAccountSasToken = (sasToken: string) => {
   // const sasOptionsDecoded: any = {
