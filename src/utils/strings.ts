@@ -16,9 +16,11 @@ export default class Strings {
     [key: string]: string;
   } {
     if (!sasToken || sasToken.length === 0) return {};
+    if (sasToken.includes('?'))
+      throw Error('Input error: sasToken unexpectedly has a delimiter');
 
     const pairs = sasToken.split('&');
-    if (!pairs) throw Error('Split error: no pairs found');
+    if (!pairs || pairs.length < 2) return {};
 
     const result: { [key: string]: string } = {};
     pairs.forEach(function (pair: string) {
