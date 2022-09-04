@@ -1,6 +1,10 @@
 export default class Strings {
-  public static prepareSasToken(sasToken: string): { [key: string]: string } {
-    if (!sasToken || sasToken.length === 0) return {};
+  public static prepareSasToken(sasToken: string): any {
+    if (!sasToken || sasToken.length === 0){
+      return {
+        error: { message: "Can't prepare SAS token string" }
+      };
+    }
 
     // remove querystring delimiter
     sasToken = Strings.removeQueryStringDelimiter(sasToken);

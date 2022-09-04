@@ -1,29 +1,22 @@
 import { allowedNodeEnvironmentFlags } from 'process';
 import Decode from './index';
+import sasTokens from '../data/sas-tokens.json';
 
 describe('index', () => {
-  test('success - azureStorageSasToken returns JSON object', () => {
-    let sasToken: string = 'name1=value1&name2=value2';
+  describe('token list', () => {
+    test.each(sasTokens)(
+      `given Id:$id - $name`,
+      ({ sas, type, formedCorrectly, realToken, error }) => {
+        const results: any = Decode.azureStorageSasToken(sas);
 
-    // @ts-ignore
-    const results: any = Decode.azureStorageSasToken(sasToken);
+        if (type) {
+          expect(results.sasType).toEqual(type);
+        }
 
-    expect(results.name1).toEqual(`value1`);
-    expect(results.name2).toEqual(`value2`);
-  });
-  test('fail - azureStorageSasToken:empty sas token parameter string throws error', () => {
-    let sasToken: string;
-    expect.assertions(2);
-
-    try {
-      // @ts-ignore
-      const result: any = Decode.azureStorageSasToken(sasToken);
-    } catch (error) {
-      expect(error).toBeInstanceOf(Error);
-      expect(error).toHaveProperty(
-        'message',
-        'Input error: sasToken parameter is empty'
-      );
-    }
+        if (results.error && typeof results.error === 'object') {
+          expect(JSON.stringify(results.error)).toEqual(JSON.stringify(error));
+        }
+      }
+    );
   });
 });
