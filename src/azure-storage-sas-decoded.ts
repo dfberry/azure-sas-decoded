@@ -21,7 +21,6 @@ export interface SasDecoded {
 }
 
 export default class AzureStorageSasDecoded {
-  
   public static decodeSasToken = (sasTokenOptions: any): any => {
     const sasDecoded: any = {
       sasTokenOptions,
@@ -35,9 +34,7 @@ export default class AzureStorageSasDecoded {
 
     if (sasDecoded.results.sasType === SasType.Service) {
       sasDecoded.results.arePermissionsInOrder =
-        AzureStorageSasDecoded.arePermissionsInOrder(
-          sasDecoded.results.permissions as string
-        );
+        AzureStorageSasDecoded.arePermissionsInOrder(sasTokenOptions.sp);
     }
 
     // if you get this far, sas should be considered formedCorrectly

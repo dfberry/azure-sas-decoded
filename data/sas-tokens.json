@@ -1,43 +1,70 @@
 [
-     {
-        "id":0,
-        "name": "Account sas - 0",
-        "sas": "sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-01T07:53:23Z&st=2022-08-31T23:53:23Z&sip=255.255.255.0-255.255.255.255&spr=https&sig=0anQ6SrElFTemHfXzFrOKWd4WUwYpn1pB4lnJ4Pkn4Q%3D",
-        "type": "Account",
-        "formedCorrectly": true,
-        "realToken": true,
-        "successfulDecode": true,
-        "error": null
-
-    },
-    {
-        "id": 1,
-        "name": "Service sas - 1",
-        "sas": "sp=racwdli&st=2022-08-31T23:56:54Z&se=2024-09-01T07:56:54Z&sip=255.255.255.0-255.255.255.255&spr=https&sv=2021-06-08&sr=c&sig=F855IntfIlcNKkVYnb0SXy9Zh67LSd5U6YzcJ0sgLC0%3D",
-        "type": "Service",
-        "formedCorrectly": true,
-        "realToken": true,
-        "successfulDecode": true,
-        "error": null
-    },
-    {
-        "id":2,
-        "name": "querystring (not true sas) - 1",
-        "sas": "name1=value1&name2=value2",
-        "type": "Unexpected",
-        "formedCorrectly": true,
-        "realToken": false,
-        "successfulDecode": true,
-        "error": null
-    },
-    {
-        "id":3,
-        "name": "empty string",
-        "sas": "",
-        "type": null,
-        "formedCorrectly": true,
-        "realToken": false,
-        "successfulDecode": true,
-        "error": { "message": "Input error: sasToken parameter is empty"}
-    }
+  {
+    "id": 0,
+    "name": "Account sas - 0",
+    "sas": "sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2024-09-01T07:53:23Z&st=2022-08-31T23:53:23Z&sip=255.255.255.0-255.255.255.255&spr=https&sig=0anQ6SrElFTemHfXzFrOKWd4WUwYpn1pB4lnJ4Pkn4Q%3D",
+    "type": "Account",
+    "formedCorrectly": true,
+    "realToken": true,
+    "successfulDecode": true,
+    "error": null,
+    "areServiceSasPermissionsInOrder": null
+  },
+  {
+    "id": 1,
+    "name": "Service sas - 1",
+    "description": "flag failing test: not sure how i is verified in required permissions order yet",
+    "sas": "sp=racwdli&st=2022-08-31T23:56:54Z&se=2024-09-01T07:56:54Z&sip=255.255.255.0-255.255.255.255&spr=https&sv=2021-06-08&sr=c&sig=F855IntfIlcNKkVYnb0SXy9Zh67LSd5U6YzcJ0sgLC0%3D",
+    "type": "Service",
+    "formedCorrectly": true,
+    "realToken": true,
+    "successfulDecode": true,
+    "error": null,
+    "areServiceSasPermissionsInOrder": true
+  },
+  {
+    "id": 2,
+    "name": "querystring (not true sas) - 1",
+    "sas": "name1=value1&name2=value2",
+    "type": "Unexpected",
+    "formedCorrectly": true,
+    "realToken": false,
+    "successfulDecode": true,
+    "error": null,
+    "areServiceSasPermissionsInOrder": null
+  },
+  {
+    "id": 3,
+    "name": "empty string",
+    "sas": "",
+    "type": null,
+    "formedCorrectly": true,
+    "realToken": false,
+    "successfulDecode": true,
+    "error": { "message": "Input error: sasToken parameter is empty" },
+    "areServiceSasPermissionsInOrder": null
+  },
+  {
+    "id": 4,
+    "name": "Service sas - 2",
+    "sas": "sp=acrwdli&st=2022-08-31T23:56:54Z&se=2024-09-01T07:56:54Z&sip=255.255.255.0-255.255.255.255&spr=https&sv=2021-06-08&sr=c&sig=F855IntfIlcNKkVYnb0SXy9Zh67LSd5U6YzcJ0sgLC0%3D",
+    "type": "Service",
+    "formedCorrectly": true,
+    "realToken": false,
+    "successfulDecode": true,
+    "error": null,
+    "areServiceSasPermissionsInOrder": false
+  },
+  {
+    "id": 5,
+    "name": "Service sas - 2 - w/o set immut policy in perms",
+    "description": "flag: not sure how i is verified in required permissions order yet",
+    "sas": "sp=racwdl&st=2022-08-31T23:56:54Z&se=2024-09-01T07:56:54Z&sip=255.255.255.0-255.255.255.255&spr=https&sv=2021-06-08&sr=c&sig=F855IntfIlcNKkVYnb0SXy9Zh67LSd5U6YzcJ0sgLC0%3D",
+    "type": "Service",
+    "formedCorrectly": true,
+    "realToken": true,
+    "successfulDecode": true,
+    "error": null,
+    "areServiceSasPermissionsInOrder": true
+  }
 ]

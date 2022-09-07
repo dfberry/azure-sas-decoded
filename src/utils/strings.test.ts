@@ -12,8 +12,7 @@ describe('strings', () => {
       expect.assertions(2);
 
       try {
-        // @ts-ignore
-        const results = Strings.queryStringToJSON(sasToken);
+        Strings.queryStringToJSON(sasToken);
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
         expect(error).toHaveProperty(

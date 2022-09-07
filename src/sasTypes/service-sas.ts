@@ -15,18 +15,17 @@ When you construct the SAS, you must include permissions in the following order:
 
 racwdxltmeop
 */
-const {
+import {
   generateBlobSASQueryParameters,
   ContainerSASPermissions,
   BlobSASPermissions,
   StorageSharedKeyCredential,
   SASProtocol
-} = require('@azure/storage-blob');
+} from '@azure/storage-blob';
+
 import { debug } from 'console';
 import { decode } from 'punycode';
-
 import { AZURE_CONFIG } from '../azure-config';
-
 import { isGeneratorFunction } from 'util/types';
 
 //signedResource (sr)
@@ -437,7 +436,7 @@ export function getServiceSasToken(
       accountKey
     );
 
-    const sasOptions = {
+    const sasOptions: any = {
       containerName,
       permissions: undefined,
       protocol: SASProtocol.Https,
@@ -447,7 +446,6 @@ export function getServiceSasToken(
 
     // only set blob name if it is set in the input
     if (blobName) {
-      // @ts-ignore
       sasOptions.blobName = blobName;
       (sasOptions.permissions = BlobSASPermissions.parse(permissions)),
         console.log(
@@ -478,7 +476,7 @@ export function getServiceSasToken(
 // if known basic properties match incoming properties,
 // return basic property content
 function decodeProperties(sasTokenKeys: any, serviceProperties: any) {
-  const foundProperties = {};
+  const foundProperties: any = {};
 
   // basic property names
   const servicePropertyKeys = Object.keys(serviceProperties);
@@ -491,7 +489,6 @@ function decodeProperties(sasTokenKeys: any, serviceProperties: any) {
     if (sasTokenKeys.includes(elementName)) {
       console.log(elementName);
 
-      // @ts-ignore
       foundProperties[elementName] = serviceProperties[elementName];
     }
   }
@@ -528,7 +525,6 @@ export function decodeServiceTokenQueryString(sasToken: any) {
 
   // signed permissions
   if (incomingKeys.includes('sp')) {
-    // @ts-ignore
     const incomingPermissions = sasToken?.sp?.split('');
     if (incomingPermissions) {
       sasServiceOptionsDecoded.sp.permissions = decodeProperties(
@@ -540,7 +536,6 @@ export function decodeServiceTokenQueryString(sasToken: any) {
   }
   // signed resource
   if (incomingKeys.includes('sr')) {
-    // @ts-ignore
     const incomingResource = sasToken?.sr?.split('');
     if (incomingResource) {
       sasServiceOptionsDecoded.sr.resources = decodeProperties(

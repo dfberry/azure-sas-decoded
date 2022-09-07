@@ -1,4 +1,4 @@
- import {
+import {
   generateAccountSASQueryParameters,
   AccountSASPermissions,
   AccountSASServices,

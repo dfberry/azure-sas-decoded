@@ -1,6 +1,6 @@
 export default class Strings {
   public static prepareSasToken(sasToken: string): any {
-    if (!sasToken || sasToken.length === 0){
+    if (!sasToken || sasToken.length === 0) {
       return {
         error: { message: "Can't prepare SAS token string" }
       };
