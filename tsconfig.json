@@ -4,15 +4,17 @@
     "module": "commonjs",
     "baseUrl": "./",
     "esModuleInterop": true,
+    "noEmit": false,
     "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "noEmit": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "rootDir": ".",
   },
   "files": ["node_modules/jest-extended/types/index.d.ts"],
-  "include": [ "src/**/*", "test/**/*"],
+  "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"]
 }

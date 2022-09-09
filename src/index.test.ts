@@ -1,6 +1,6 @@
 import { allowedNodeEnvironmentFlags } from 'process';
 import Decode from './index';
-import sasTokens from '../data/sas-tokens.json';
+import sasTokens from './data/sas-tokens.json';
 
 describe('index', () => {
   describe('token list', () => {
@@ -27,7 +27,9 @@ describe('index', () => {
           );
         }
 
-        expect(JSON.stringify(results.sasProperties)).toEqual(JSON.stringify(sasProperties));
+        expect(JSON.stringify(results.sasProperties)).toEqual(
+          JSON.stringify(sasProperties)
+        );
 
         if (results.error && typeof results.error === 'object') {
           expect(JSON.stringify(results.error)).toEqual(JSON.stringify(error));
