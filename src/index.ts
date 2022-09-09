@@ -15,11 +15,12 @@ export default class Decode {
   public static azureStorageSasToken(sasToken: string): any {
     const returnResults: any = {
       sasToken,
-      options: undefined,
-      optionsDecoded: undefined,
-      sasType: undefined,
+      options: null,
+      optionsDecoded: null,
+      sasType: null,
       formedCorrectly: false,
       successfulDecode: false,
+      sasProperties: null,
       error: {
         message: ''
       }
@@ -29,13 +30,12 @@ export default class Decode {
       if (!sasToken) throw Error('Input error: sasToken parameter is empty');
 
       returnResults.options = Strings.prepareSasToken(sasToken);
-      const { sasTokenOptions, sasType, results, formedCorrectly } =
-        AzureStorage.decodeSasToken(returnResults.options);
+      const decodedToken: any = AzureStorage.decodeSasToken(
+        sasToken,
+        returnResults.options
+      );
 
-      returnResults.sasType = sasType;
-      returnResults.formedCorrectly = formedCorrectly;
-
-      return results;
+      return { sasToken, ...decodedToken };
     } catch (error: any) {
       returnResults.error.message = error?.message;
       return returnResults;

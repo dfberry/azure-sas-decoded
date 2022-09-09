@@ -1,5 +1,8 @@
 import { BlockBlobUploadStreamOptions } from '@azure/storage-blob';
-
+import {
+  decodeServiceTokenQueryString,
+  arePermissionsInOrder
+} from './sasTypes/service-sas-decode';
 /**
  * Type of Sas token
  */
@@ -21,7 +24,10 @@ export interface SasDecoded {
 }
 
 export default class AzureStorageSasDecoded {
-  public static decodeSasToken = (sasTokenOptions: any): any => {
+  public static decodeSasToken = (
+    sasToken: string,
+    sasTokenOptions: any
+  ): any => {
     const sasDecoded: any = {
       sasTokenOptions,
       sasType: SasType.Unknown,
@@ -29,18 +35,27 @@ export default class AzureStorageSasDecoded {
       formedCorrectly: false
     };
 
-    sasDecoded.results.sasType =
-      AzureStorageSasDecoded.getSasType(sasTokenOptions);
+    // Get Sas Type
+    const sasType = AzureStorageSasDecoded.getSasType(sasTokenOptions);
 
-    if (sasDecoded.results.sasType === SasType.Service) {
-      sasDecoded.results.arePermissionsInOrder =
-        AzureStorageSasDecoded.arePermissionsInOrder(sasTokenOptions.sp);
+    let arePermissionsInOrderResult = null;
+
+    // Get information based on SAS type
+    if (sasType === SasType.Service) {
+      arePermissionsInOrderResult = arePermissionsInOrder(sasTokenOptions.sp);
     }
 
-    // if you get this far, sas should be considered formedCorrectly
-    sasDecoded.formedCorrectly = true;
+    const sasProperties = decodeServiceTokenQueryString(sasTokenOptions);
 
-    return sasDecoded;
+    // if you get this far, sas should be considered formedCorrectly
+    const formedCorrectly = true;
+
+    return {
+      sasType,
+      arePermissionsInOrder: arePermissionsInOrderResult,
+      sasProperties,
+      formedCorrectly
+    };
   };
   /**
    *  
@@ -63,24 +78,5 @@ export default class AzureStorageSasDecoded {
         return SasType.Unexpected;
       }
     }
-  }
-  public static arePermissionsInOrder(permissions: string): boolean {
-    // TBD what does empty permissions mean
-    if (!permissions || permissions.length === 0) return true;
-
-    // https://docs.microsoft.com/en-us/rest/api/storageservices/create-service-sas#specify-permissions
-    const requiredSortOrderArray = 'racwdxltmeop'.split('');
-
-    const sortedPermissions = permissions
-      .split('')
-      .sort(
-        (a, b) =>
-          requiredSortOrderArray.indexOf(a) - requiredSortOrderArray.indexOf(b)
-      )
-      .join('');
-
-    if (permissions === sortedPermissions) return true;
-
-    return false;
   }
 }

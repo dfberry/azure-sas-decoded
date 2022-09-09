@@ -31,33 +31,4 @@ describe('AzureStorageSasDecoded', () => {
       expect(type).toEqual(SasType.Unexpected);
     });
   });
-  describe('arePermissionsInOrder', () => {
-    test('success - true', () => {
-      const permissions = 'racw';
-      const expectResult = true;
-
-      const arePermissionsInOrder =
-        AzureStorageSasDecoded.arePermissionsInOrder(permissions);
-
-      expect(arePermissionsInOrder).toEqual(expectResult);
-    });
-    test('success - false', () => {
-      const permissions = 'arcw';
-      const expectResult = false;
-
-      const arePermissionsInOrder =
-        AzureStorageSasDecoded.arePermissionsInOrder(permissions);
-
-      expect(arePermissionsInOrder).toEqual(expectResult);
-    });
-    test('success - no permissions - true', () => {
-      const permissions = '';
-      const expectResult = true;
-
-      const arePermissionsInOrder =
-        AzureStorageSasDecoded.arePermissionsInOrder(permissions);
-
-      expect(arePermissionsInOrder).toEqual(expectResult);
-    });
-  });
 });
